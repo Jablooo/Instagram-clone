@@ -1,19 +1,32 @@
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Image data:</strong>
-  <%= @photo.image_data %>
-</p>
+<div class="container">
 
-<p>
-  <strong>User:</strong>
-  <%= @photo.user %>
-</p>
+  <div class="row">
 
-<p>
-  <strong>Caption:</strong>
-  <%= @photo.caption %>
-</p>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+    <p class="col-12">
+      <strong>Image data:</strong>
+      <%= @photo.image_data %>
+      <img class="col-9" src="<%= @photo.image_url %>">
+    </p>
+
+    <p class="col-3">
+      <strong>User:</strong>
+      <%= @photo.user %>
+    </p>
+
+    <p class="col-3">
+      <strong>Caption:</strong>
+      <%= @photo.caption %>
+    </p>
+
+  </div>
+
+  <br>
+
+  <%= link_to 'Edit', edit_photo_path(@photo) %> |
+  <%= link_to 'Back', photos_path %>
+
+</div>

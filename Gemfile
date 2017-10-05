@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 gem 'devise'
+gem 'bootstrap', '~> 4.0.0.beta'
+gem "shrine"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
