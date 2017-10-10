@@ -8,8 +8,11 @@
 
     <p class="col-12">
       <strong>Image data:</strong>
-      <%= @photo.image_data %>
-      <img class="col-9" src="<%= @photo.image_url %>">
+      <div class="col-12">
+        <% if photo.image_data? %>
+          <%= image_tag @photo.image_url, width:400 %><!-- <img class="col-4" src="<%= @photo.image_url %>"> or  -->
+        <% end %>
+      </div>
     </p>
 
     <p class="col-3">

@@ -1,4 +1,4 @@
 class Photo < ApplicationRecord
   belongs_to :user
-  include ImageUploader[:image]
+  include ImageUploader::Attachment.new(:image) # adds an `image` virtual attribute
 end

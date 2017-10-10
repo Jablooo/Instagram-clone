@@ -1,12 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+<% if user_signed_in? %>
+  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<% else %>
+  <%= link_to('Login', new_user_session_path)  %>
+<% end %>
 
 <div class="container">
 
+<%= link_to 'Upload New Photo', new_photo_path, class:'btn btn-success'%>
 
   <h1>Photos</h1>
 
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>Image data</th>
@@ -19,8 +25,8 @@
     <tbody>
       <% @photos.each do |photo| %>
         <tr>
-          <td><img class="col-5" src="<%= photo.image_url %>"></td>
-          <td><%= photo.user %></td>
+          <td><%= image_tag photo.image_url, width:300 %></td>
+          <td><%= photo.user.username %></td>
           <td><%= photo.caption %></td>
           <td><%= link_to 'Show', photo %></td>
           <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
