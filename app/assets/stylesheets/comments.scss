@@ -1,0 +1,23 @@
+$comment-color: #359AFF;
+
+.comments {
+  padding-top: 15px;
+  background-color: $comment-color;
+}
+
+.comment-box {
+  // border: 1px solid black;
+  color: darken($comment-color, 30%);
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: lighten($comment-color, 30%);
+}
+
+.photo-comment {
+  padding-bottom: 20;
+}
+
+.photo {
+  width: 100%;
+}

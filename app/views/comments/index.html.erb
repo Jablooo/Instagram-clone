@@ -1,0 +1,26 @@
+<h1>Photo Comments</h1>
+<div class="row">
+  <div class="photo-comment col-7 ">
+    <%= image_tag @photo.image_url, class: "photo" %>
+  </div>
+
+  <div class="comments col-5">
+    <% @comments.each do |comment| %>
+      <p class="comment-box"><%= comment.content %></p>
+    <% end %>
+  </div>
+</div>
+<br>
+
+<%= form_with(model: [@photo, @comment], local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :comment %>
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+
+  <div class="action form-group">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+
+
+<% end %>

@@ -1,5 +1,5 @@
 <div class="container">
-  
+
   <h2>Sign up</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -7,12 +7,12 @@
 
     <div class="field">
       <%= f.label :username %><br />
-      <%= f.text_field :username%>
+      <%= f.text_field :username, autofocus: true %>
     </div>
 
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %>
+      <%= f.email_field :email %>
     </div>
 
     <div class="field">

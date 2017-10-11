@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :photos
+  
 
   # The people who follow us
   has_and_belongs_to_many :followers, class_name: 'User', join_table: :followers, foreign_key: :followed_id, association_foreign_key: :follower_id
