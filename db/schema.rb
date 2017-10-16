@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012125500) do
+ActiveRecord::Schema.define(version: 20171016052547) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content", null: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20171012125500) do
     t.integer "followed_id", null: false
     t.integer "follower_id", null: false
     t.index ["followed_id", "follower_id"], name: "index_followers_on_followed_id_and_follower_id", unique: true
-    t.index ["follower_id", "followed_id"], name: "index_followers_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id", "followed_id"], name: "index_followers_on_follower_id_and_followed_id"
   end
 
   create_table "likes", id: false, force: :cascade do |t|
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20171012125500) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
