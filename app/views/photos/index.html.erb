@@ -1,38 +1,44 @@
-<% if user_signed_in? %>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-<% else %>
-  <%= link_to('Login', new_user_session_path)  %>
-<% end %>
-
 <div class="container">
+  <div class="row col-8">
 
-<%= link_to 'Upload New Photo', new_photo_path, class:'btn btn-success'%>
+    <h1>Photos</h1>
 
-  <h1>Photos</h1>
+    <!-- <% @photos.each do |photo| %>
+      <div class="col-12">
+        <%= image_tag photo.image_url, class: 'photo' %>
+      </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Image data</th>
-        <th>User</th>
-        <th>Caption</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+      <div class="col-12">
+        <%= photo.caption %>
+      </div>
 
-    <tbody>
-      <% @photos.each do |photo| %>
-        <tr>
-          <td><%= image_tag photo.image_url, width:300 %></td>
-          <td><%= photo.user.email %></td>
-          <td><%= photo.caption %></td>
-          <td><%= link_to 'Show', photo %></td>
-          <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-          <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+      <div class="editing col-12 pb-4">
+        <%= link_to 'Show', photo %>
+        <%= link_to 'Edit', edit_photo_path(photo) %>
+        <%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+      <br>
+    <% end %> -->
+
+    <section>
+      <% @photos.reverse.each do |photo| %>
+        <article>
+          <%= link_to photo do %>
+            <figure>
+              <%= image_tag photo.image_url, class: 'img-fluid', alt: photo.caption %>
+            </figure>
+          <% end %>
+          <p>
+            <strong><%= link_to "#{photo.user.email}", user_path(photo.user_id)  %></strong>
+            <!-- <strong><%#= link_to photo.user.email, user_path %></strong> -->
+            <%= photo.caption %>
+          </p>
+        </article>
       <% end %>
-    </tbody>
-  </table>
+    </section>
+
+  </div>
+
   <br>
   <%= link_to 'New Photo', new_photo_path %>
 </div>

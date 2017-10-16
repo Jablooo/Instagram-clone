@@ -1,24 +1,40 @@
+<nav class="navbar">
+  <%= link_to 'Back', @photo %>
+</nav>
+<!-- WOOOOOOHHHHHOOOOO lines 5-7 watch it -->
+<section>
+  <% render @comments, photo: @photo %>
+</section>
+
 <h1>Photo Comments</h1>
-<div class="row">
-  <div class="photo-comment col-7 ">
+<div class="row col-6">
+  <div class="photo-comment col-12 col-6-lg ">
     <%= image_tag @photo.image_url, class: "photo" %>
   </div>
 
-  <div class="comments col-5">
-    <% @comments.each do |comment| %>
-      <p class="comment-box"><%= comment.content %></p>
+  <div class="comments col-12 col-6-lg">
+    <% @comments.reverse.each do |comment| %>
+      <article class="comment-box">
+      <p class="comment-text">
+        <%= comment.content %>
+      </p>
+      <p class="time-stamp">
+        <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+      </p>
+      </article>
     <% end %>
   </div>
 </div>
 <br>
 
+<!-- <#%= render 'form', comment: @comment %> -->
 <%= form_with(model: [@photo, @comment], local: true) do |form| %>
-  <div class="form-group">
+  <div class="form-group col-6">
     <%= form.label :comment %>
     <%= form.text_area :content, class: 'form-control' %>
   </div>
 
-  <div class="action form-group">
+  <div class="action form-group col-6">
     <%= form.submit class: 'btn btn-primary' %>
   </div>
 

@@ -6,11 +6,11 @@ $comment-color: #359AFF;
 }
 
 .comment-box {
-  // border: 1px solid black;
+  border: 1px solid black;
   color: darken($comment-color, 30%);
   font-weight: bold;
   border-radius: 5px;
-  padding: 5px;
+  margin-bottom: 10px;
   background-color: lighten($comment-color, 30%);
 }
 
@@ -20,4 +20,13 @@ $comment-color: #359AFF;
 
 .photo {
   width: 100%;
+}
+
+.comment-text {
+  padding: 5px 0 0 5px ;
+}
+
+.time-stamp {
+  text-align: right;
+  padding-right: 5px;
 }

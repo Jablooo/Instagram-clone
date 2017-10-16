@@ -11,21 +11,41 @@
       </div>
     </p>
 
-    <p class="col-3">
+    <p class="col-6">
       <strong>User:</strong>
-      <%= @photo.user %>
+      <%= @photo.user.email %>
     </p>
 
-    <p class="col-3">
+    <p class="col-6 ">
       <strong>Caption:</strong>
       <%= @photo.caption %>
     </p>
+
+    <%= form_with(model: @photo, method: :patch) do |f| %>
+      <% liked = @photo.liked_by?(current_user) %>
+      <%= f.hidden_field :liked, value: liked %>
+      <%= f.button liked ? 'Unlike' : 'Like' %>
+    <% end %>
+
+    <%= form_with(model: @photo, local: true) do |form| %>
+      <div class="form-group col-6">
+        <%= form.label :comment %>
+        <%= form.text_area :content, class: 'form-control' %>
+      </div>
+
+      <div class="action form-group col-6">
+        <%= form.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
 
   </div>
 
   <br>
 
-  <%= link_to 'Edit', edit_photo_path(@photo) %> |
-  <%= link_to 'Back', photos_path %>
+  <% if current_user == @photo.user %>
+    <%= link_to 'Edit', edit_photo_path(@photo) %> ·
+    <%= link_to 'Destroy', @photo, method: :delete, data: { confirm: 'Are you sure?' } %> ·
+  <% end %>
 
 </div>
+<%= link_to 'Back', photos_path %>

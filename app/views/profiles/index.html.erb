@@ -1,0 +1,42 @@
+<% if user_signed_in? %>
+  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<% else %>
+  <%= link_to('Login', new_user_session_path)  %>
+<% end %>
+
+<div class="container">
+
+  <h1>Profiles</h1>
+
+  <div class="row col-8">
+
+    <h1>Photos</h1>
+
+    <% @profile.each do |profile| %>
+      <div class="class col-12">
+
+        <%= profile.user %>
+      </div>
+
+      <div class="class col-12">
+        <%= profile.username %>
+      </div>
+      <div class="class col-12">
+        <%= profile.name %>
+      </div>
+      <div class="class col-12">
+        <%= profile.bio %>
+      </div>
+
+      <div class="editing col-12 pb-4">
+        <%= link_to 'Show', profile %>
+        <%= link_to 'Edit', edit_profile_path(profile) %>
+        <%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+      <br>
+    <% end %>
+  </div>
+
+  <br>
+  <%= link_to 'New Profile', new_profile_path %>
+</div>

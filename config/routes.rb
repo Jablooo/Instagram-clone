@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
+
+
+  root 'photos#index'
+
+  devise_for :users
+
+  # the only: specifies which routes are going to be create a show page for all users but then controller: :profiles means that if u are the current user u can access the profile routes aspects, edit destroy blah blah.
+  resources :users, only: [:show], controller: :profiles
+  resource :profile
+
   resources :photos do
     resources :comments
   end
 
-  root 'photos#index'
+  get '/feed' => 'feed#index'
 
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

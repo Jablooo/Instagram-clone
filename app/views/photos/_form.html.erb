@@ -12,19 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :image, :class => "col-2"%>
-    <%= form.hidden_field :image, value: @photo.cached_image_data %> <!-- remembers what you uploaded incase there is a notice or alert so you dont have you reupload that same file -->
-    <%= form.file_field :image, id: :photo_image_data %>
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :photo_image %>
   </div>
 
-  <!-- <div class="field">
-    <%#= form.label :user_id, :class => "col-2"%>
-    <%#= form.text_field :user_id, id: :photo_user_id %>
-  </div> -->
-
   <div class="field">
-    <%= form.label :caption, :class => "col-2"%>
-    <%= form.text_field :caption, id: :photo_caption %>
+    <%= form.label :caption %>
+    <%= form.text_area :caption, id: :photo_description %>
   </div>
 
   <div class="actions">

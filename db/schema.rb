@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011105500) do
+ActiveRecord::Schema.define(version: 20171012125500) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content", null: false
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20171011105500) do
     t.index ["follower_id", "followed_id"], name: "index_followers_on_follower_id_and_followed_id", unique: true
   end
 
+  create_table "likes", id: false, force: :cascade do |t|
+    t.integer "photo_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at"
+    t.index ["photo_id", "user_id"], name: "index_likes_on_photo_id_and_user_id", unique: true
+  end
+
   create_table "photos", force: :cascade do |t|
     t.text "image_data"
     t.integer "user_id"
@@ -36,6 +43,17 @@ ActiveRecord::Schema.define(version: 20171011105500) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "username"
+    t.string "name"
+    t.text "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+    t.index ["username"], name: "index_profiles_on_username", unique: true
   end
 
   create_table "users", force: :cascade do |t|
