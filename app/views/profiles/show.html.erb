@@ -47,10 +47,17 @@
   <div class="row pt-3">
     <% @profile.user.photos.each do |image| %>
       <%# link_to photos_path %> <!-- FIX THIS -->
-      <figure class="col-4">
-        <%= image_tag image.image_url, class: 'img-profile' %>
-        <%= image.caption %>
-      </figure>
+
+      <!--        Card Testing          -->
+      <div class="card col-4" style="width: 20rem;">
+        <%= image_tag image.image_url, class: 'card-img-top' %>
+        <div class="card-body">
+          <p class="card-text"><%= image.caption %></p>
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+      </div>
+      <!--                     -->
+
     <% end %>
 
   </div>
