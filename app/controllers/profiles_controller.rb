@@ -37,10 +37,15 @@ class ProfilesController < ApplicationController
 
   def update
     respond_to do |format|
+      # performing_follow? is in the private methods is the params present? if yes then ...
       if performing_follow?
+
         @profile.user.toggle_followed_by(current_user)
+        # the next two lines are all about the redirecting or the 'resheshing' of a page so that you can see the result of follow and unfollow without having to refresh.
         format.html { redirect_to @profile.user }
         format.json { render :show, status: :ok, location: @profile }
+
+
       elsif @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }

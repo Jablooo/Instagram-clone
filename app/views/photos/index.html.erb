@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row col-8">
+  <div class="row col-6 pt-4">
 
     <h1>Photos</h1>
 
@@ -23,16 +23,16 @@
     <section>
       <% @photos.reverse.each do |photo| %>
         <article>
+          <h4><strong><%= link_to "#{photo.user.profile.username}", user_path(photo.user_id)  %></strong></h4>
           <%= link_to photo do %>
             <figure>
               <%= image_tag photo.image_url, class: 'img-fluid', alt: photo.caption %>
             </figure>
           <% end %>
           <p>
-            <strong><%= link_to "#{photo.user.email}", user_path(photo.user_id)  %></strong>
-            <!-- <strong><%#= link_to photo.user.email, user_path %></strong> -->
             <%= photo.caption %>
           </p>
+          <br>
         </article>
       <% end %>
     </section>

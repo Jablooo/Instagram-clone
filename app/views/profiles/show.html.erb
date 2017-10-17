@@ -1,3 +1,4 @@
+<br>
 <nav class="navbar">
   <h1><%= @profile.username %></h1>
 </nav>
@@ -5,12 +6,8 @@
 <div class="container-fluid">
   <p id="notice"><%= notice %></p>
 
-  <h3><%= @profile.name %></h3>
-  <%#+ @profile.first_name + ' ' + @profile.last_name %>
-
-  <p><%= @profile.bio %></p>
-
-  <div class="d-flex justify-content-around">
+  <!-- No of Photos, followers & following -->
+  <div class="d-flex justify-content-around pb-3 col-6">
     <p class="profile-count text-center">
       <%= pluralize(@profile.user.photos.count, 'photo').split(' ').join('<br>').html_safe %>
     </p>
@@ -20,15 +17,41 @@
     <p class="profile-count text-center">
       <%= pluralize(@profile.user.following.count, 'following', plural: 'following').split(' ').join('<br>').html_safe %>
     </p>
+
   </div>
 
-  <% if @profile.user == current_user %>
-    <%= link_to 'Edit', edit_profile_path(@profile) %>
-  <% else %>
-    <%= form_with(model: @profile.user, method: :patch) do |f| %>
-      <%= f.hidden_field :toggle_follow, value: true %>
-      <%= f.button @profile.user.followed_by?(current_user) ? 'Unfollow' : 'Follow',
-        class: 'btn btn-primary btn-block' %>
+  <div class="row justify-content-center">
+    <br>
+    <h3><%= @profile.name %></h3>
+  </div>
+
+  <div class="row justify-content-center">
+    <p><%= @profile.bio %></p>
+  </div>
+
+  <div class="row justify-content-center pt-2">
+    <% if @profile.user == current_user %>
+      <%= link_to 'Edit', edit_profile_path(@profile) %>
+    <% else %>
+      <%= form_with(model: @profile.user, method: :patch) do |form| %>
+      <!-- the line below is memorising the value true associated with the toggle_follow method, turning it from true to false or flase to true-->
+        <%= form.hidden_field :toggle_follow, value: true %>
+
+        <%= form.button @profile.user.followed_by?(current_user) ? 'Unfollow' : 'Follow',
+          class: 'btn btn-primary btn-block col-12' %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+  <br>
+
+  <div class="row pt-3">
+    <% @profile.user.photos.each do |image| %>
+      <%# link_to photos_path %> <!-- FIX THIS -->
+      <figure class="col-4">
+        <%= image_tag image.image_url, class: 'img-profile' %>
+        <%= image.caption %>
+      </figure>
+    <% end %>
+
+  </div>
 </div>

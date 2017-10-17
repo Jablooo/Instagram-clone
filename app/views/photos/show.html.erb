@@ -1,46 +1,42 @@
 <div class="container">
 
-  <div class="row">
+  <div class="row pt-5">
 
+    <h2 class="col-12">
+      <%= @photo.user.profile.username %>
+    </h2>
 
     <p class="col-12">
-      <strong>Image data:</strong>
       <div class="col-12">
         <%= image_tag @photo.image_url, width:400 %><!-- <img class="col-4" src="<%= @photo.image_url %>"> or  -->
-
       </div>
     </p>
 
-    <p class="col-6">
-      <strong>User:</strong>
-      <%= @photo.user.email %>
-    </p>
-
-    <p class="col-6 ">
+    <p class="col-12">
       <strong>Caption:</strong>
       <%= @photo.caption %>
     </p>
 
+    <%= form_with(model: @photo, local: true) do |form| %>
+      <div class="form-group col-12">
+        <%= form.label :comment %>
+        <%= form.text_area :content, class: 'form-control' %>
+      </div>
+
+      <div class="action form-group col-12">
+        <%= form.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <!-- <div class="col-12"> -->
     <%= form_with(model: @photo, method: :patch) do |f| %>
       <% liked = @photo.liked_by?(current_user) %>
       <%= f.hidden_field :liked, value: liked %>
       <%= f.button liked ? 'Unlike' : 'Like' %>
     <% end %>
-
-    <%= form_with(model: @photo, local: true) do |form| %>
-      <div class="form-group col-6">
-        <%= form.label :comment %>
-        <%= form.text_area :content, class: 'form-control' %>
-      </div>
-
-      <div class="action form-group col-6">
-        <%= form.submit class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+    <!-- </div> -->
 
   </div>
-
-  <br>
 
   <% if current_user == @photo.user %>
     <%= link_to 'Edit', edit_photo_path(@photo) %> ·
